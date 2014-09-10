@@ -1,4 +1,4 @@
-jfinal-slf4j
+jfinal-quartz
 ============
 
-jfinal  slf4j  log api
+jfinal  quartz  plugin
