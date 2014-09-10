@@ -1,6 +1,6 @@
 package cn.dreampie.quartz;
 
-import cn.dreampie.PropertiesUtils;
+import cn.dreampie.PropertiesKit;
 import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.wall.WallFilter;
 import com.jfinal.plugin.druid.DruidPlugin;
@@ -24,12 +24,12 @@ public class QuartzConnectionProvider implements ConnectionProvider {
 
   @Override
   public void initialize() throws SQLException {
-    PropertiesUtils.me().loadPropertyFile(DB_CONFIG);
+    PropertiesKit.me().loadPropertyFile(DB_CONFIG);
     druidPlugin = new DruidPlugin(
-        PropertiesUtils.me().getProperty("db.default.url"),
-        PropertiesUtils.me().getProperty("db.default.user"),
-        PropertiesUtils.me().getProperty("db.default.password"),
-        PropertiesUtils.me().getProperty("db.default.driver"));
+        PropertiesKit.me().getProperty("db.default.url"),
+        PropertiesKit.me().getProperty("db.default.user"),
+        PropertiesKit.me().getProperty("db.default.password"),
+        PropertiesKit.me().getProperty("db.default.driver"));
     // StatFilter提供JDBC层的统计信息
     druidPlugin.addFilter(new StatFilter());
     // WallFilter的功能是防御SQL注入攻击

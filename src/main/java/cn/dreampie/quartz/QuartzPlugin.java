@@ -1,6 +1,6 @@
 package cn.dreampie.quartz;
 
-import cn.dreampie.PropertiesUtils;
+import cn.dreampie.PropertiesKit;
 import com.google.common.collect.Lists;
 import com.jfinal.kit.PathKit;
 import com.jfinal.plugin.IPlugin;
@@ -42,7 +42,7 @@ public class QuartzPlugin implements IPlugin {
   public boolean start() {
     try {
       //加载配置文件
-      Properties properties = PropertiesUtils.me().loadPropertyFile(config);
+      Properties properties = PropertiesKit.me().loadPropertyFile(config);
       //实例化
       QuartzFactory.me().sf = new StdSchedulerFactory(properties);
       //获取Scheduler
@@ -73,7 +73,7 @@ public class QuartzPlugin implements IPlugin {
 
   public void startPropertiesJobs() {
     if (new File(PathKit.getRootClassPath() + jobs).exists()) {
-      Properties properties = PropertiesUtils.me().loadPropertyFile(jobs);
+      Properties properties = PropertiesKit.me().loadPropertyFile(jobs);
       Enumeration enums = properties.keys();
 
       while (enums.hasMoreElements()) {
