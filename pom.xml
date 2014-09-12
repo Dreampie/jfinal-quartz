@@ -8,6 +8,7 @@
   <artifactId>jfinal-quartz</artifactId>
   <version>0.1</version>
   <packaging>jar</packaging>
+  <name>jfinal-quartz</name>
   <description>jfinal quartz plugins</description>
   <url>https://github.com/Dreampie/jfinal-quartz</url>
 
