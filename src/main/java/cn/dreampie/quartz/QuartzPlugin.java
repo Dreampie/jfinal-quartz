@@ -1,9 +1,12 @@
 package cn.dreampie.quartz;
 
 import cn.dreampie.PropertiesKit;
+import com.alibaba.druid.filter.stat.StatFilter;
+import com.alibaba.druid.wall.WallFilter;
 import com.google.common.collect.Lists;
 import com.jfinal.kit.PathKit;
 import com.jfinal.plugin.IPlugin;
+import com.jfinal.plugin.druid.DruidPlugin;
 import org.joda.time.DateTime;
 import org.quartz.Scheduler;
 import org.quartz.impl.StdSchedulerFactory;
@@ -21,6 +24,8 @@ import java.util.Properties;
 public class QuartzPlugin implements IPlugin {
 
   private Logger logger = LoggerFactory.getLogger(getClass());
+  public static String dsName = "main";
+  public static boolean dsAlone = false;
   /**
    * 默认配置文件*
    */
@@ -34,8 +39,8 @@ public class QuartzPlugin implements IPlugin {
 
   }
 
-  public QuartzPlugin(String config) {
-    this.config = config;
+  public QuartzPlugin(String dsName) {
+    this.dsName = dsName;
   }
 
   @Override
@@ -112,4 +117,27 @@ public class QuartzPlugin implements IPlugin {
     }
   }
 
+  public String getConfig() {
+    return config;
+  }
+
+  public void setConfig(String config) {
+    this.config = config;
+  }
+
+  public String getJobs() {
+    return jobs;
+  }
+
+  public void setJobs(String jobs) {
+    this.jobs = jobs;
+  }
+
+  public static boolean isDsAlone() {
+    return dsAlone;
+  }
+
+  public static void setDsAlone(boolean dsAlone) {
+    QuartzPlugin.dsAlone = dsAlone;
+  }
 }
