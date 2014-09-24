@@ -6,7 +6,7 @@
 
   <groupId>cn.dreampie</groupId>
   <artifactId>jfinal-quartz</artifactId>
-  <version>0.2</version>
+  <version>0.1</version>
   <packaging>jar</packaging>
   <name>jfinal-quartz</name>
   <description>jfinal quartz plugins</description>
