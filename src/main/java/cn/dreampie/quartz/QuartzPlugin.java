@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.net.URL;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Properties;
@@ -77,7 +78,7 @@ public class QuartzPlugin implements IPlugin {
 
 
   public void startPropertiesJobs() {
-    if (new File(PathKit.getRootClassPath() + jobs).exists()) {
+    if (PropertiesKit.exist(jobs)) {
       Properties properties = PropertiesKit.me().loadPropertyFile(jobs);
       Enumeration enums = properties.keys();
 
