@@ -1,20 +1,13 @@
 package cn.dreampie.quartz;
 
 import cn.dreampie.PropertiesKit;
-import com.alibaba.druid.filter.stat.StatFilter;
-import com.alibaba.druid.wall.WallFilter;
 import com.google.common.collect.Lists;
-import com.jfinal.kit.PathKit;
 import com.jfinal.plugin.IPlugin;
-import com.jfinal.plugin.druid.DruidPlugin;
-import org.joda.time.DateTime;
 import org.quartz.Scheduler;
 import org.quartz.impl.StdSchedulerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
-import java.net.URL;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Properties;
@@ -50,30 +43,28 @@ public class QuartzPlugin implements IPlugin {
       //加载配置文件
       Properties properties = PropertiesKit.me().loadPropertyFile(config);
       //实例化
-      QuartzFactory.me().sf = new StdSchedulerFactory(properties);
+      QuartzKit.setFactory(new StdSchedulerFactory(properties));
       //获取Scheduler
-      Scheduler sched = QuartzFactory.me().sf.getScheduler();
+      Scheduler sched = QuartzKit.getFactory().getScheduler();
       //内存,数据库的任务
       sched.start();
       //属性文件中的任务
       startPropertiesJobs();
       return true;
     } catch (Exception e) {
-      e.printStackTrace();
+      throw new RuntimeException("Can't start quartz plugin.", e);
     }
-    return false;
   }
 
   @Override
   public boolean stop() {
     try {
-      QuartzFactory.me().sf.getScheduler().shutdown();
-      QuartzFactory.me().sf = null;
+      QuartzKit.getFactory().getScheduler().shutdown();
+      QuartzKit.setFactory(null);
       return true;
     } catch (Exception e) {
-      e.printStackTrace();
+      throw new RuntimeException("Can't stop quartz plugin.", e);
     }
-    return false;
   }
 
 
@@ -112,7 +103,7 @@ public class QuartzPlugin implements IPlugin {
         } catch (ClassNotFoundException e) {
           throw new RuntimeException(e);
         }
-        QuartzFactory.me().startJobCron(id, keyArr[1], keyArr[1], jobCronExp, clazz);
+        QuartzKit.startJobCron(new QuartzKey(id, keyArr[1], keyArr[1]), jobCronExp, clazz);
         startedJob.add(keyArr[1]);
       }
     }
