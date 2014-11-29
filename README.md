@@ -3,6 +3,8 @@ jfinal-quartz
 
 jfinal  quartz  plugin
 
+use  [search](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22jfinal-quartz%22)
+
 use  it  very easy:
 
 ```java
