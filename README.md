@@ -20,11 +20,11 @@ public class DemoJob implements Job {
 
 //quartzKey   must  different  every task
 //addParam  to  add param in job
-//run  once
+//run  cron
 new QuartzCronJob(new QuartzKey(1, "test", "test"), "*/5 * * * * ?", JobDemo.class)
 
 .addParam("name", "quartz").start();
-//run cron
+//run once
 new QuartzOnceJob(new QuartzKey(2, "test", "test"), new Date(), DemoJob.class)
 
 .addParam("name", "quartz").start();
