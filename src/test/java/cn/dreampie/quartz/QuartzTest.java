@@ -18,6 +18,8 @@ public class QuartzTest {
 
     QuartzKey quartzKey = new QuartzKey(1, "test", "test");
 
+    System.out.println(quartzKey.equals(new QuartzKey(1, "test", "test")));
+
 //    new QuartzCronJob(quartzKey, "*/5 * * * * ?", JobDemo.class).addParam("name", "quartz").start();
 
     new QuartzOnceJob(quartzKey, new Date(), DemoJob.class).addParam("name", "quartz").start();

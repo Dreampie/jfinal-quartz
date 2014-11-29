@@ -43,8 +43,15 @@ public class QuartzKey {
     this.group = group;
   }
 
-  @Override
   public String toString() {
     return "id:" + id + ",name:" + name + ",group:" + group;
+  }
+
+  public boolean equals(Object o) {
+    if (o != null && o instanceof QuartzKey) {
+      QuartzKey quartzKey = (QuartzKey) o;
+      return this.id == quartzKey.getId() && this.name.equals(quartzKey.getName()) && this.group.equals(quartzKey.getGroup());
+    }
+    return super.equals(o);
   }
 }
