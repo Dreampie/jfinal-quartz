@@ -1,11 +1,7 @@
 package cn.dreampie.quartz;
 
-import cn.dreampie.PropertiesKit;
-import com.alibaba.druid.filter.stat.StatFilter;
-import com.alibaba.druid.wall.WallFilter;
 import com.jfinal.plugin.activerecord.Config;
 import com.jfinal.plugin.activerecord.DbKit;
-import com.jfinal.plugin.druid.DruidPlugin;
 import org.quartz.utils.ConnectionProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

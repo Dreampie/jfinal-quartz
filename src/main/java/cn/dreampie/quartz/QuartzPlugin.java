@@ -1,7 +1,8 @@
 package cn.dreampie.quartz;
 
 import cn.dreampie.PropertiesKit;
-import com.google.common.collect.Lists;
+import cn.dreampie.quartz.job.QuartzCronJob;
+import cn.dreampie.quartz.job.QuartzJob;
 import com.jfinal.plugin.IPlugin;
 import org.quartz.Scheduler;
 import org.quartz.impl.StdSchedulerFactory;
@@ -9,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Enumeration;
-import java.util.List;
 import java.util.Properties;
 
 /**
@@ -27,7 +27,6 @@ public class QuartzPlugin implements IPlugin {
 
   private String jobs = "/quartz/jobs.properties";
 
-  private static List<String> startedJob = Lists.newArrayList();
 
   public QuartzPlugin() {
 
@@ -43,9 +42,9 @@ public class QuartzPlugin implements IPlugin {
       //加载配置文件
       Properties properties = PropertiesKit.me().loadPropertyFile(config);
       //实例化
-      QuartzKit.setFactory(new StdSchedulerFactory(properties));
+      QuartzKit.setSchedulerFactory(new StdSchedulerFactory(properties));
       //获取Scheduler
-      Scheduler sched = QuartzKit.getFactory().getScheduler();
+      Scheduler sched = QuartzKit.getSchedulerFactory().getScheduler();
       //内存,数据库的任务
       sched.start();
       //属性文件中的任务
@@ -59,8 +58,8 @@ public class QuartzPlugin implements IPlugin {
   @Override
   public boolean stop() {
     try {
-      QuartzKit.getFactory().getScheduler().shutdown();
-      QuartzKit.setFactory(null);
+      QuartzKit.getSchedulerFactory().getScheduler().shutdown();
+      QuartzKit.setSchedulerFactory(null);
       return true;
     } catch (Exception e) {
       throw new RuntimeException("Can't stop quartz plugin.", e);
@@ -80,12 +79,11 @@ public class QuartzPlugin implements IPlugin {
         }
 
         String[] keyArr = key.split("\\.");
-        if (startedJob.contains(keyArr[1])) {
-          continue;
-        }
+
 
         String jobClassKey = key.replace(keyArr[2], "class");
         String idKey = key.replace(keyArr[2], "id");
+        String groupKey = key.replace(keyArr[2], "group");
         String cronKey = key.replace(keyArr[2], "cron");
         String enable = key.replace(keyArr[2], "enable");
 
@@ -95,7 +93,17 @@ public class QuartzPlugin implements IPlugin {
         }
 
         Integer id = Integer.parseInt(properties.getProperty(idKey));
-        String jobCronExp = properties.getProperty(cronKey);
+        String group = properties.getProperty(groupKey);
+
+        QuartzKey quartzKey = new QuartzKey(id, keyArr[1], group == null ? keyArr[1] : group);
+
+        QuartzJob quartzJob = QuartzKit.getJob(quartzKey);
+        if (quartzJob != null) {
+          logger.info("This  job  has started," + quartzKey);
+          continue;
+        }
+
+        String jobCron = properties.getProperty(cronKey);
         String jobClassName = properties.getProperty(jobClassKey);
         Class clazz;
         try {
@@ -103,8 +111,8 @@ public class QuartzPlugin implements IPlugin {
         } catch (ClassNotFoundException e) {
           throw new RuntimeException(e);
         }
-        QuartzKit.startJobCron(new QuartzKey(id, keyArr[1], keyArr[1]), jobCronExp, clazz);
-        startedJob.add(keyArr[1]);
+        //启动任务
+        new QuartzCronJob(quartzKey, jobCron, clazz).start();
       }
     }
   }

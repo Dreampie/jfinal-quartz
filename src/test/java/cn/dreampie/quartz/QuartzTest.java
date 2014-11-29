@@ -1,13 +1,9 @@
 package cn.dreampie.quartz;
 
+import cn.dreampie.quartz.job.QuartzOnceJob;
 import org.junit.Test;
-import org.quartz.Job;
-import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
 
 import java.util.Date;
-
-import static org.junit.Assert.*;
 
 public class QuartzTest {
 
@@ -22,7 +18,10 @@ public class QuartzTest {
 
     QuartzKey quartzKey = new QuartzKey(1, "test", "test");
 
-    QuartzKit.startJobCron(quartzKey, "*/5 * * * * ?", JobDemo.class);
+//    new QuartzCronJob(quartzKey, "*/5 * * * * ?", JobDemo.class).addParam("name", "quartz").start();
+
+    new QuartzOnceJob(quartzKey, new Date(), DemoJob.class).addParam("name", "quartz").start();
+    new QuartzOnceJob(quartzKey, new Date(), DemoJob.class).addParam("name", "quartz").start();
 //    Thread.sleep(10000);
 //    QuartzKit.stopJob(quartzKey);
   }

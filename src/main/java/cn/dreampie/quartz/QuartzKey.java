@@ -9,6 +9,10 @@ public class QuartzKey {
   String name;
   String group;
 
+  public QuartzKey(long id, String name) {
+    this(id, name, "default");
+  }
+
   public QuartzKey(long id, String name, String group) {
     this.id = id;
     this.name = name;
@@ -37,5 +41,10 @@ public class QuartzKey {
 
   public void setGroup(String group) {
     this.group = group;
+  }
+
+  @Override
+  public String toString() {
+    return "id:" + id + ",name:" + name + ",group:" + group;
   }
 }

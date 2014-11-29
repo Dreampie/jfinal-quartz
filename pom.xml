@@ -6,11 +6,11 @@
 
   <groupId>cn.dreampie</groupId>
   <artifactId>jfinal-quartz</artifactId>
-  <version>0.1</version>
+  <version>0.2</version>
   <packaging>jar</packaging>
   <name>jfinal-quartz</name>
   <description>jfinal quartz plugins</description>
-  <url>https://github.com/Dreampie/jfinal-quartz</url>
+  <url>https://github.com/Dreampie/${project.name}</url>
 
   <licenses>
     <license>
@@ -37,9 +37,9 @@
   </developers>
 
   <scm>
-    <connection>scm:git:git@github.com:Dreampie/jfinal-quartz.git</connection>
-    <developerConnection>scm:git:git@github.com:Dreampie/jfinal-quartz.git</developerConnection>
-    <url>git@github.com:Dreampie/jfinal-quartz.git</url>
+    <connection>scm:git:git@github.com:Dreampie/${project.name}.git</connection>
+    <developerConnection>scm:git:git@github.com:Dreampie/${project.name}.git</developerConnection>
+    <url>git@github.com:Dreampie/${project.name}.git</url>
   </scm>
   <properties>
     <project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
@@ -102,7 +102,7 @@
   </distributionManagement>
 
   <build>
-    <finalName>jfinal-quartz</finalName>
+    <finalName>${project.name}</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

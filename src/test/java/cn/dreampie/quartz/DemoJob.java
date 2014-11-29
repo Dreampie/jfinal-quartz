@@ -5,13 +5,15 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
 import java.util.Date;
+import java.util.Map;
 
 /**
  * Created by ice on 14-11-28.
  */
-public class JobDemo implements Job {
+public class DemoJob implements Job {
   public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-    System.out.println("hi" + new Date().getTime());
+    Map data = jobExecutionContext.getJobDetail().getJobDataMap();
+    System.out.println("hi,"+data.get("name")+"," + new Date().getTime());
   }
 }
 
