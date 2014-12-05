@@ -1,9 +1,17 @@
 jfinal-quartz
 ============
 
-jfinal  quartz  plugin
+jfinal  quartz  plugin，查看其他插件-> [Maven](http://search.maven.org/#search%7Cga%7C1%7Ccn.dreampie)
 
-use  [search](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22jfinal-quartz%22)
+maven 引用  ${jfinal-tablebind.version}替换为相应的版本如:0.2
+
+```xml
+<dependency>
+<groupId>cn.dreampie</groupId>
+<artifactId>jfinal-quartz</artifactId>
+<version>${jfinal-quartz.version}</version>
+</dependency>
+```
 
 use  it  very easy:
 
