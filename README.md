@@ -3,7 +3,7 @@ jfinal-quartz
 
 jfinal  quartz  plugin，查看其他插件-> [Maven](http://search.maven.org/#search%7Cga%7C1%7Ccn.dreampie)
 
-maven 引用  ${jfinal-tablebind.version}替换为相应的版本如:0.2
+maven 引用  ${jfinal-quartz.version}替换为相应的版本如:0.2
 
 ```xml
 <dependency>
