@@ -7,9 +7,9 @@ maven 引用  ${jfinal-quartz.version}替换为相应的版本如:0.2
 
 ```xml
 <dependency>
-<groupId>cn.dreampie</groupId>
-<artifactId>jfinal-quartz</artifactId>
-<version>${jfinal-quartz.version}</version>
+  <groupId>cn.dreampie</groupId>
+  <artifactId>jfinal-quartz</artifactId>
+  <version>${jfinal-quartz.version}</version>
 </dependency>
 ```
 
