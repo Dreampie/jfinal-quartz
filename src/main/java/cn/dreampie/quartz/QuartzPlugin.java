@@ -23,9 +23,9 @@ public class QuartzPlugin implements IPlugin {
   /**
    * 默认配置文件*
    */
-  private String config = "/quartz/quartz.properties";
+  private String config = "quartz/quartz.properties";
 
-  private String jobs = "/quartz/jobs.properties";
+  private String jobs = "quartz/jobs.properties";
 
 
   public QuartzPlugin() {
@@ -36,7 +36,7 @@ public class QuartzPlugin implements IPlugin {
     this.dsName = dsName;
   }
 
-  @Override
+
   public boolean start() {
     try {
       //加载配置文件
@@ -55,7 +55,7 @@ public class QuartzPlugin implements IPlugin {
     }
   }
 
-  @Override
+
   public boolean stop() {
     try {
       QuartzKit.getSchedulerFactory().getScheduler().shutdown();

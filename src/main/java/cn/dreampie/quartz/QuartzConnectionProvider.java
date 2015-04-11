@@ -17,12 +17,12 @@ public class QuartzConnectionProvider implements ConnectionProvider {
   private Logger logger = LoggerFactory.getLogger(getClass());
   private Config config;
 
-  @Override
+
   public Connection getConnection() throws SQLException {
     return config.getConnection();
   }
 
-  @Override
+
   public void initialize() throws SQLException {
     config = DbKit.getConfig(QuartzPlugin.dsName);
     if (config == null) {
@@ -30,7 +30,7 @@ public class QuartzConnectionProvider implements ConnectionProvider {
     }
   }
 
-  @Override
+
   public void shutdown() throws SQLException {
     if (QuartzPlugin.dsAlone)
       config.getConnection().close();
