@@ -28,10 +28,15 @@ public class QuartzKit {
   }
 
   public static void stopJob(QuartzKey quartzKey) {
+     QuartzJob job = null;
     for (QuartzJob quartzJob : quartzJobs) {
       if (quartzJob.getQuartzKey().equals(quartzKey)) {
-        quartzJob.stop();
+         job = quartzJob;
+         break;
       }
+    }
+    if(job != null){
+      job.stop();
     }
   }
 
